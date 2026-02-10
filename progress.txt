@@ -1,0 +1,6 @@
+#12:20 25th video, havent checked if the user_info is working
+
+username - keertiam
+pass - django
+
+rewatching update user profile done

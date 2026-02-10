@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5 mb-4">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder mb-3">Update Profile</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Update your account</p>
+        </div>
+    </div>
+</header>
+
+<div class ="container">
+    <div class="row">
+        <center>
+            <div class="col-8 col-md-6 col-lg-4">
+                <form method="post" action="{% url 'store:update_user' %}" 
+                autocomplete="off" class="p-4 border rounded bg-light shadow-sm">
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+                
+                <br/><br/>
+                <a href="{% url 'store:update_user' %}" class="btn btn-success">Change Password</a>
+                </form>
+            </div>
+            </center>
+
+{% endblock %}

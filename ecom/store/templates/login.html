@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5 mb-4">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder mb-3">login</h1>
+            <p class="lead fw-normal text-white-50 mb-0">login to your account</p>
+        </div>
+    </div>
+</header>
+
+<div class ="container">
+    <div class="row">
+        <center>
+            <div class="col-8 col-md-6 col-lg-4">
+                <form method="post" autocomplete="off" action="{% url 'store:login' %}" class="p-4 border rounded bg-light shadow-sm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="exampleInputUsername" placeholder="Enter your username" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+            </center>
+
+{% endblock %}

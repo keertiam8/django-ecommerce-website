@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mb-4 shadow-lg border-0">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-5 p-3">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
+                    </div>
+                    <div class="col-md-7 p-4">
+                        <div class="card-body">
+                            <h2 class="card-title mb-3 text-primary">{{ product.name }}</h2>
+                            <h5 class="mb-3 text-muted">Category: {{ product.category.name }}</h5>
+                            <h4 class="text-success mb-3">${{ product.price }}</h4>
+                            <p class="card-text mb-4">{{ product.description }}</p>
+
+                            <form method="post" action="{% url 'cart:cart_add' %}" class="mb-2 d-flex align-items-center gap-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                                <div>
+                                    <label for="quantity" class="form-label visually-hidden">Quantity</label>
+                                    <select name="quantity" id="quantity-cart" class="form-select" style="width:120px;">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <button type="button" value="{{ product.id }}" class="btn btn-success" id="add-cart">Add to Cart</button>
+                            </form>
+                            <a href="/" class="btn btn-outline-dark">Back to Shop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).on('click', '#add-cart', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "{% url 'cart:cart_add' %}",
+            type: "POST",
+            data: {
+                product_id: $('#add-cart').val(),
+                product_quantity: $('#quantity-cart option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function(response) {
+                $('#cart_quantity').text(response['Cart Quantity']);// This will show cart quantity and product info in the browser console
+            },
+            error: function(xhr, errmsg, err) {
+                // Handle error
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5 mb-4">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder mb-3">CATEGORIES</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Choose your category below:</p>
+        </div>
+    </div>
+</header>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 40vh;">
+    <div class="card shadow-lg border-0" style="max-width: 700px; width: 100%;">
+        {% for category in categories %}
+            <div class="card-body">
+                <h5 class="card-title">{{ category.name }}</h5>
+                <a href="{% url 'store:category' category.name|slugify %}" class="btn btn-primary">View Products</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
