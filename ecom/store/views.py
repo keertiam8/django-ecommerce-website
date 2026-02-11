@@ -19,7 +19,7 @@ def update_password(request):
 				form.save()
 				messages.success(request, "Your Password Has Been Updated")
 				login(request, current_user)
-				return redirect('store:update_user')
+				return redirect('store:')
 			else:
 				for error in list(form.errors.values()):
 					messages.error(request, error)

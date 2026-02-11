@@ -15,10 +15,10 @@
     <div class="row">
         <center>
             <div class="col-8 col-md-6 col-lg-4">
-                <form method="post" autocomplete="off" class="p-4 border rounded bg-light shadow-sm">
+                <form method="post" action="{% url 'store:update_info' %}">
                     {% csrf_token %}
-                    {{ user_form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100">Update User</button>
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary w-100">Update Info</button>
                 
                 <br/><br/>
                 </form>
