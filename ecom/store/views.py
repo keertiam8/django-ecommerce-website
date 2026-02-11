@@ -18,8 +18,8 @@ def update_password(request):
 			if form.is_valid():
 				form.save()
 				messages.success(request, "Your Password Has Been Updated")
-				#login(request, current_user)
-				return redirect('store:login')
+				login(request, current_user)
+				return redirect('store:update_user')
 			else:
 				for error in list(form.errors.values()):
 					messages.error(request, error)
