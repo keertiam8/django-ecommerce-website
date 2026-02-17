@@ -83,7 +83,6 @@ class Cart():
         return products
     
  
-    
     def __len__(self):
         return len(self.cart)
     
