@@ -2,6 +2,9 @@
 from django.shortcuts import render,redirect
 
 from cart.cart import Cart
+from payment.forms import ShippingAddressForm
+from payment.models import ShippingAddress
+
 from .models import Product,Category, Profile
 from django.contrib.auth import logout,login,authenticate
 from django.contrib import messages
@@ -138,13 +141,16 @@ def category(request, category_name):
 def update_info(request):
     if request.user.is_authenticated:
         current_user = Profile.objects.get(user__id=request.user.id)
-        form = UserInfoForm(request.POST or None, instance=current_user)
+        shipping_user, created = ShippingAddress.objects.get_or_create(user__id=request.user.id)
 
-        if form.is_valid():
+        form = UserInfoForm(request.POST or None, instance=current_user)
+        shipping_form = ShippingAddressForm(request.POST or None, instance=shipping_user)
+        if form.is_valid() and shipping_form.is_valid():
             form.save()
+            shipping_form.save()
             messages.success(request, "Profile info has been updated successfully")
             return redirect('store:home')
-        return render(request, "update_info.html", {'form': form})
+        return render(request, "update_info.html", {'form': form, 'shippingAddress_form': shipping_form })
     else:
         messages.error(request, "You need to be logged in to update your profile")
         return redirect('store:login')

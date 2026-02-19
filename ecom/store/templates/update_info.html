@@ -5,7 +5,7 @@
 <header class="bg-dark py-5 mb-4">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder mb-3">Update info</h1>
+            <h1 class="display-4 fw-bolder mb-3">Billing Information</h1>
             <p class="lead fw-normal text-white-50 mb-0">Update your account</p>
         </div>
     </div>
@@ -18,6 +18,12 @@
                 <form method="post" action="{% url 'store:update_info' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
+
+                    <br/><br/>
+                     
+                    <strong>Shipping Information</strong>
+
+                    {{ shippingAddress_form.as_p }}
                     <button type="submit" class="btn btn-primary w-100">Update Info</button>
                 
                 <br/><br/>
