@@ -118,8 +118,7 @@ def register_user(request):
         else:
             messages.success(request,("Unsuccessful registration. Invalid information."))
 
-    else:
-        return render(request ,'register.html',{'form':form}) 
+    return render(request ,'register.html',{'form':form}) 
 
 
 def product(request, pk):
